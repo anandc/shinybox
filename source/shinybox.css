@@ -133,7 +133,10 @@ html.shinybox {
   position: relative;
   z-index: 1;
 }
-
+.svgSupport #shinybox-prev, .svgSupport #shinybox-next,
+.svgSupport  #shinybox-close {
+  background-image: url("img/icons.svg");
+}
 #shinybox-close {
   background-position: 15px 12px;
   float: left;

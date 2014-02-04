@@ -170,11 +170,13 @@
 
 
                 if (supportSVG) {
-                    var bg = $('#shinybox-close').css('background-image');
-                    bg = bg.replace('png', 'svg');
-                    $('#shinybox-prev,#shinybox-next,#shinybox-close').css({
-                        'background-image' : bg
-                    });
+                   $("#shinybox-overlay").addClass('svgSupport');
+                   img.onerror = function () {
+                    //If assetgraph does not interpret the svg file properly, the url will not be a valid image
+                      $("#shinybox-overlay").removeClass('svgSupport');
+                   }
+                   url = $("#shinybox-close").css("background-image").replace("url(", "").replace(")","");
+                   img.src = url;
                 }
 
                 $.each(elements, function () {
@@ -217,7 +219,17 @@
 
 
                 $('#shinybox-overlay').css(sliderCss);
-
+                if (plugin.settings.hideBarsDelay === 0) {
+                    $('#shinybox-slider').css({
+                        top: '50px',
+                        height: (height - 100) + 'px'
+                    });
+                } else {
+                    $('#shinybox-slider').css({
+                        top: 0,
+                        height: '100%'
+                    });
+                }
             },
 
             resize : function () {
